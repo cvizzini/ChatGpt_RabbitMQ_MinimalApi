@@ -23,10 +23,12 @@
 
 3. Rabbit MQ queues automattically started and listening for events at run time
 
-4. Basic Mediatr implementation using [Mediator]: https://github.com/martinothamar/Mediator
+4. Basic Mediatr implementation using [Mediator](https://github.com/martinothamar/Mediator)
 
 5. .NET 7 Minimal API
 
 6. .NET 7 Rate Limiter
 
 7. Swagger with Swagger UI
+
+8. Serilog logging to Console
