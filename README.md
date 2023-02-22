@@ -21,7 +21,7 @@
 
 2. Rabbit MQ with Async Consumers and direct exchange
 
-3. Rabbit MQ queues automattically started and listening for events at run time
+3. Rabbit MQ queues automatically started and listening for messages at run time
 
 4. Basic Mediatr implementation using [Mediator](https://github.com/martinothamar/Mediator)
 
