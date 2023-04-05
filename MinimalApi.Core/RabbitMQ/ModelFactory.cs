@@ -10,7 +10,20 @@ public class ModelFactory : IDisposable
     public ModelFactory(IConnectionFactory connectionFactory, RabbitMqSettings settings)
     {
         _settings = settings;
-        _connection = connectionFactory.CreateConnection();
+        _connection = CreateConnection(connectionFactory);
+    }
+
+    private static IConnection CreateConnection(IConnectionFactory connectionFactory)
+    {
+        try
+        {
+            return connectionFactory.CreateConnection();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        return null; 
     }
 
     public void Dispose()

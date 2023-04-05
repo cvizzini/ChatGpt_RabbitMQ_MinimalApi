@@ -8,6 +8,7 @@
 
 
 	<ItemGroup>
+		<PackageReference Include="DotNetCore.CAP.Dashboard" Version="7.1.0" />
 		<PackageReference Include="Mediator.Abstractions" Version="2.0.*" />
 		<PackageReference Include="Mediator.SourceGenerator" Version="2.0.*">
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,6 +18,8 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="7.0.0" />
 		<PackageReference Include="RabbitMQ.Client" Version="6.4.0" />
-		<PackageReference Include="OpenAI" Version="1.5.0" />
+		<PackageReference Include="OpenAI" Version="1.6.0" />
+		<PackageReference Include="Savorboard.CAP.InMemoryMessageQueue" Version="7.0.0" />
+		<PackageReference Include="DotNetCore.CAP.InMemoryStorage" Version="7.1.0" />
 	</ItemGroup>
 </Project>

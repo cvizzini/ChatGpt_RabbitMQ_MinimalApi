@@ -1,4 +1,5 @@
-﻿using Mediator;
+﻿using DotNetCore.CAP;
+using Mediator;
 using MinimalApi.Core.Mediator.Handler;
 using MinimalApi.Core.Model;
 using MinimalApi.Core.RabbitMQ;
@@ -21,6 +22,19 @@ public static class ApiExtensions
             .WithDescription("Prompt chat gpt for a response")
             .WithDisplayName("Prompt ChatGPT")
             .WithName("Prompt ChatGPT")
+            .WithOpenApi();
+
+        app.MapPost(
+                "/dalle",
+                async ([FromBody, Required] DallEInput prompt, [FromServices] ChatGptService chatGptService) =>
+                {
+                    return await chatGptService.ExecuteDallECommand(prompt);
+
+                })
+            .WithSummary("Prompt DALL-E for a response")
+            .WithDescription("Prompt DALL-E for a response")
+            .WithDisplayName("Prompt DALL-E")
+            .WithName("Prompt DALL-E")
             .WithOpenApi();
 
         app.MapPost("/queue/product",
@@ -53,6 +67,29 @@ public static class ApiExtensions
             .WithDisplayName("Order Mediator")
             .WithName("Order Mediator")
             .WithOpenApi();
+
+        app.MapPost("/fanQueue/product",
+                ([FromBody, Required] ProductDto product, [FromServices] RabbitSender rabbitSender) =>
+                {
+                    rabbitSender.PublishFanOutMessage<ProductDto>(product, "FanOut");
+                }).WithSummary("Create a product on fan out queue")
+            .WithDescription("Product on Fan Out RabbitMq")
+            .WithDisplayName("Product Fan Out Queue")
+            .WithName("Product Fan Out Queue")
+            .WithOpenApi();
+
+        app.MapPost("/capQueue",
+              async ([FromBody, Required] ProductDto product, [FromServices] ICapPublisher capBus) =>
+              {
+                  await capBus.PublishAsync("test.show.product", product);
+
+                  await capBus.PublishAsync("test.show.time", DateTime.Now);
+
+              }).WithSummary("Create a product on cap in memory queue")
+          .WithDescription("Product on Cap In-Memory Queue")
+          .WithDisplayName("Product Cap In-Memory Queue")
+          .WithName("Product Cap In-Memory Queue")
+          .WithOpenApi();
 
         app.MapGet("/mediator/ping/{id}",
                 async ([FromServices] IMediator mediator, [FromRoute, Required] string id) =>

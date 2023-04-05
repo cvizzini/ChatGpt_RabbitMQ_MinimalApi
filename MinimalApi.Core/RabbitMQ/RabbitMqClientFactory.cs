@@ -27,6 +27,9 @@ public static class RabbitMqClientFactory
         services.AddSingleton(sp => sp.GetRequiredService<ModelFactory>().CreateChannel());
         services.AddSingleton<IQueueHandler, ProductQueueHandler>();
         services.AddSingleton<IQueueHandler, OrderQueueHandler>();
+        services.AddSingleton<IQueueHandler, FanOutQueue1Handler>();
+        services.AddSingleton<IQueueHandler, FanOutQueue2Handler>();
+        services.AddSingleton<IQueueHandler, FanOutQueue3Handler>();
         services.AddSingleton<RabbitSender>();
         return services;
     }

@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using MinimalApi.APIs;
+using MinimalApi.Core.CapQueue;
 using MinimalApi.Core.ChatGpt;
 using MinimalApi.Core.Mediator;
 using MinimalApi.Core.RabbitMQ;
@@ -15,6 +16,21 @@ builder.Services.AddDefaultRateLimiter();
 builder.Services.SetUpRabbitMq(builder.Configuration);
 builder.Services.SetupChatGpt(builder.Configuration);
 builder.Services.SetUpMediator(builder.Configuration);
+builder.Services.SetUpCapQueue(builder.Configuration);
+
+// add policy
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin() // or .WithOrigins("http://localhost:4200") 
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowAnyOrigin();
+    });
+});
+
+
 
 builder.Host.UseSerilog((context, configuration) =>
 {
@@ -32,5 +48,8 @@ app.UseSwaggerUI(options =>
 
 app.UseSerilogRequestLogging();
 app.WithPromptApi();
+
+app.UseCors(); // enable policy
+
 app.StartRabbitMqConsumers();
 await app.RunAsync();

@@ -1,6 +1,6 @@
-# ChatGpt RabbitMQ Minimal API 
+# Minimal API  Playground
 
-> A .NET 7 Minimal API that implements basic ChatGpt Integration with Rabbit MQ and Mediator
+> A .NET 7 Minimal API Playground that integrations with various technologies. 
 
 ## Installation
 
@@ -14,12 +14,14 @@
 
 5. Set the MinimalApi project as startup
 
+6. (optional) Run the ClientApp/index.html to test DALL-E
+
 
 ## Features 
 
-1. Chat GPT implementation
+1. Chat GPT and DALL-E integration
 
-2. Rabbit MQ with Async Consumers and direct exchange
+2. Rabbit MQ with Async Consumers, direct and fanout exchanges
 
 3. Rabbit MQ queues automatically started and listening for messages at run time
 
@@ -32,3 +34,5 @@
 7. Swagger with Swagger UI
 
 8. Serilog logging to Console
+
+9. Cap InMemory Queue[Cap](https://cap.dotnetcore.xyz)
